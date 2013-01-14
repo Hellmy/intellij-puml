@@ -1,0 +1,36 @@
+{
+  parserClass="de.docksnet.puml.parser.PumlParser"
+  stubParserClass="de.docksnet.puml.parser.GrammarParserUtil"
+
+  implements="de.docksnet.puml.psi.BnfCompositeElement"
+  extends="de.docksnet.puml.psi.impl.BnfCompositeElementImpl"
+
+  psiClassPrefix="Bnf"
+  psiImplClassSuffix="Impl"
+  psiPackage="de.docksnet.puml.psi"
+  psiImplPackage="de.docksnet.puml.psi.impl"
+  psiImplUtilClass="de.docksnet.puml.psi.impl.GrammarPsiImplUtil"
+
+  elementTypeHolderClass="de.docksnet.puml.psi.BnfTypes"
+  elementTypePrefix="BNF_"
+  elementTypeClass="de.docksnet.puml.psi.BnfCompositeElementType"
+  tokenTypeClass="de.docksnet.puml.psi.BnfTokenType"
+  
+  tokens = [
+    START_UML="@startuml"
+    END_UML="@enduml"
+    ACTOR="actor"
+    DASH="-"
+  ]
+
+  pin(".*")=1
+
+}
+
+root ::= file_body
+file_body ::= '@startuml' uml_body '@enduml'
+uml_body ::= line *
+private line ::= actor_def | link_def
+
+actor_def ::= actor id
+link_def ::= id '--' id
