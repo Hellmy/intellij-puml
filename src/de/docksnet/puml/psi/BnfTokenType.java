@@ -19,7 +19,24 @@ import com.intellij.psi.tree.IElementType;
 import de.docksnet.puml.language.PumlLanguage;
 
 public class BnfTokenType extends IElementType {
-  public BnfTokenType(String debug) {
-    super(debug, PumlLanguage.PUML_LANGUAGE);
-  }
+    private int line;
+    private int column;
+
+    public BnfTokenType(String debug) {
+        super(debug, PumlLanguage.PUML_LANGUAGE);
+    }
+
+    public BnfTokenType(int line, int column, String debug) {
+        this(debug);
+        this.line = line;
+        this.column = column;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public int getColumn() {
+        return column;
+    }
 }

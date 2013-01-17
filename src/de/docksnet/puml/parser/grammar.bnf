@@ -23,14 +23,6 @@
     DASH="-"
   ]
 
-  pin(".*")=1
-
 }
 
-root ::= file_body
-file_body ::= '@startuml' uml_body '@enduml'
-uml_body ::= line *
-private line ::= actor_def | link_def
-
-actor_def ::= actor id
-link_def ::= id '--' id
+root ::= "@startuml"
