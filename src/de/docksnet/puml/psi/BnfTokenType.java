@@ -23,7 +23,7 @@ public class BnfTokenType extends IElementType {
     private int column;
 
     public BnfTokenType(String debug) {
-        super(debug, PumlLanguage.PUML_LANGUAGE);
+        super(debug, PumlLanguage.INSTANCE);
     }
 
     public BnfTokenType(int line, int column, String debug) {

@@ -3,35 +3,40 @@ package de.docksnet.puml.highlighter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import de.docksnet.puml.psi.BnfTypes;
 import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.Map;
+
+import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
 public class PumlSyntaxHighlighter extends SyntaxHighlighterBase {
 
     private static final Map<IElementType, TextAttributesKey> KEYS;
 
-    private static final TextAttributesKey UML_KEYWORD = TextAttributesKey.createTextAttributesKey("UML_KEYWORD",
+    public static final TextAttributesKey UML_KEYWORD = TextAttributesKey.createTextAttributesKey("UML_KEYWORD",
             SyntaxHighlighterColors.KEYWORD.getDefaultAttributes());
 
-    private static final TextAttributesKey UML_TYPE = TextAttributesKey.createTextAttributesKey("UML_TYPE",
-            SyntaxHighlighterColors.NUMBER.getDefaultAttributes());
+    public static final TextAttributesKey UML_TYPE = TextAttributesKey.createTextAttributesKey("UML_TYPE",
+            SyntaxHighlighterColors.KEYWORD.getDefaultAttributes());
 
-    private static final TextAttributesKey UML_STRING = TextAttributesKey.createTextAttributesKey
+    public static final TextAttributesKey UML_STRING = TextAttributesKey.createTextAttributesKey
             ("UML_STRING",
             SyntaxHighlighterColors.STRING.getDefaultAttributes());
 
-    private static final TextAttributesKey BAD_CHARACTER_ATTRIBUTES = TextAttributesKey.createTextAttributesKey("BAD_CHARACTER_ATTRIBUTES",
-            SyntaxHighlighterColors.INVALID_STRING_ESCAPE.getDefaultAttributes());
+    public static final TextAttributesKey UML_ID = createTextAttributesKey("ID",
+            new TextAttributes(Color.RED, null, null, null, Font.BOLD));
 
     static {
         KEYS = new THashMap<IElementType, TextAttributesKey>();
 
         KEYS.put(BnfTypes.BNF_STRING, UML_STRING);
+        KEYS.put(BnfTypes.BNF_ID, UML_ID);
 
         KEYS.put(BnfTypes.BNF_ABSTRACT, UML_TYPE);
         KEYS.put(BnfTypes.BNF_ACTOR, UML_TYPE);

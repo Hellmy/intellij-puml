@@ -21,7 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PumlParserDefinition implements ParserDefinition {
 
-    public static final IFileElementType BNF_FILE_ELEMENT_TYPE = new IFileElementType("BNF_FILE", PumlLanguage.PUML_LANGUAGE);
+    public static final IFileElementType BNF_FILE_ELEMENT_TYPE = new IFileElementType("BNF_FILE", PumlLanguage.INSTANCE);
     public static final TokenSet WS = TokenSet.create(TokenType.WHITE_SPACE);
     public static final IElementType BNF_LINE_COMMENT = new BnfTokenType("BNF_LINE_COMMENT");
     public static final IElementType BNF_BLOCK_COMMENT = new BnfTokenType("BNF_BLOCK_COMMENT");

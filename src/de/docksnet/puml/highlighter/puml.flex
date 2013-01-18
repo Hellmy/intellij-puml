@@ -36,11 +36,12 @@ ALPHA=[:letter:]
 DIGIT=[:digit:]
 
 ID_BODY={ALPHA} | {DIGIT} | "_"
-ID=({ID_BODY}) *
+ID=({ID_BODY}) * | "(" ({ID_BODY}|{LINE_WS}|\\) * ")" | ":" ({ID_BODY}|{LINE_WS}|\\) * ":"
 
 QUOTE=\"
 CHAR={ALPHA} | {DIGIT} | "_" | {LINE_WS}
-STRING={QUOTE}({ALPHA}|{DIGIT}|{LINE_WS}|{EOL})*{QUOTE}
+CHAR2=[^\n\r\f\\\"]
+STRING={QUOTE}({CHAR2}|{LINE_WS}|{EOL})*{QUOTE}
 
 %%
 
@@ -113,7 +114,7 @@ STRING={QUOTE}({ALPHA}|{DIGIT}|{LINE_WS}|{EOL})*{QUOTE}
 
      {STRING} {yybegin(YYINITIAL); return BnfTypes.BNF_STRING; }
 
-     {ID} {yybegin(YYINITIAL); return newSym("id"); }
+     {ID} {yybegin(YYINITIAL); return BnfTypes.BNF_ID; }
 
       [^] {yybegin(YYINITIAL); return com.intellij.psi.TokenType.BAD_CHARACTER; }
 

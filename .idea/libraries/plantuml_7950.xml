@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/lib/plantuml-7950.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../opt/plantuml/src/plantuml-7950/src" />
+    </SOURCES>
   </library>
 </component>

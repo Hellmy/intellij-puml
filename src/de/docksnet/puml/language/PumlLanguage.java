@@ -8,7 +8,7 @@ import de.docksnet.puml.highlighter.PumlSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 
 public class PumlLanguage extends CompositeLanguage {
-    public static final PumlLanguage PUML_LANGUAGE = new PumlLanguage();
+    public static final PumlLanguage INSTANCE = new PumlLanguage();
 
     private PumlLanguage() {
         super("PUML", "text/puml");

@@ -20,6 +20,6 @@ import de.docksnet.puml.language.PumlLanguage;
 
 public class BnfCompositeElementType extends IElementType {
   public BnfCompositeElementType(String debug) {
-    super(debug, PumlLanguage.PUML_LANGUAGE);
+    super(debug, PumlLanguage.INSTANCE);
   }
 }

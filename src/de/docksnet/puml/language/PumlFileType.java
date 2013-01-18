@@ -10,7 +10,7 @@ public class PumlFileType extends LanguageFileType {
     public static final PumlFileType PUML_FILE_TYPE = new PumlFileType();
 
     protected PumlFileType() {
-        super(PumlLanguage.PUML_LANGUAGE);
+        super(PumlLanguage.INSTANCE);
     }
 
     @NotNull

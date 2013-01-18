@@ -37,7 +37,7 @@ public class PumlParser implements PsiParser {
 
         while (builder.getTokenType() != null) {
             if (errorInLine != -1) {
-                if (((BnfTokenType) builder.getTokenType()).getLine() == errorInLine) {
+                if (builder.getTokenType() instanceof BnfTokenType && ((BnfTokenType) builder.getTokenType()).getLine() == errorInLine) {
                     builder.error(createErrorString(syntaxResult));
                 }
             }
