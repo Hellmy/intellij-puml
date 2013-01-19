@@ -24,13 +24,16 @@ ALPHA=[:letter:]
 DIGIT=[:digit:]
 
 ID_BODY={ALPHA} | {DIGIT} | "_"
-ID=({ID_BODY}) * | "(" ({ID_BODY}|{LINE_WS}|\\) * ")" | ":" ({ID_BODY}|{LINE_WS}|\\) * ":"
+ID=({ID_BODY}) *
+EXT_ID=({ID_BODY}|{LINE_WS}|\\) *
 
 QUOTE=\"
 CHAR={ALPHA} | {DIGIT} | "_" | {LINE_WS}
 CHAR2=[^\n\r\f\\\"]
 STRING={QUOTE}({CHAR2}|{LINE_WS}|{EOL})*{QUOTE}
 
+%state INSIDE_COLONS
+%state STEREOTYPE
 %%
 
 <YYINITIAL> {
@@ -39,17 +42,29 @@ STRING={QUOTE}({CHAR2}|{LINE_WS}|{EOL})*{QUOTE}
 
     "actor" {yybegin(YYINITIAL); return PumlTypes.ACTOR; }
     "usecase" {yybegin(YYINITIAL); return PumlTypes.USECASE; }
-
-
     "as" {yybegin(YYINITIAL); return PumlTypes.AS; }
 
-     {ID} {yybegin(YYINITIAL); return PumlTypes.ID; }
+    ":" {yybegin(INSIDE_COLONS); return PumlTypes.COLON; }
+    "<<" {yybegin(STEREOTYPE); return PumlTypes.STEREOTYPE_START; }
 
-     "->" {yybegin(YYINITIAL); return PumlTypes.ARROW; }
+     {ID} {yybegin(YYINITIAL); return PumlTypes.ID; }
 
      {LINE_WS} {yybegin(YYINITIAL); return com.intellij.psi.TokenType.WHITE_SPACE; }
      {EOL} {yybegin(YYINITIAL); return PumlTypes.EOL; }
 
       [^] {yybegin(YYINITIAL); return com.intellij.psi.TokenType.BAD_CHARACTER; }
-
 }
+
+<INSIDE_COLONS> {
+    {EXT_ID} {yybegin(INSIDE_COLONS); return PumlTypes.ID; }
+    ":" {yybegin(YYINITIAL); return PumlTypes.COLON; }
+    [^] {yybegin(YYINITIAL); return com.intellij.psi.TokenType.BAD_CHARACTER; }
+}
+
+<STEREOTYPE> {
+    {CHAR}* {yybegin(STEREOTYPE); return PumlTypes.STRING; }
+    ">>" {yybegin(YYINITIAL); return PumlTypes.STEREOTYPE_END; }
+    [^] {yybegin(YYINITIAL); return com.intellij.psi.TokenType.BAD_CHARACTER; }
+}
+
+

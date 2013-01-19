@@ -72,7 +72,7 @@ public class PumlLanguageUtil {
     public static void main(String[] args) {
 
         System.out.println();
-        System.out.println("Puml.flex: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("puml.flex: ++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println();
 
         System.out.println(toFlex(PumlLanguageUtil.TYPES));

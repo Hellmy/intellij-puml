@@ -13,12 +13,19 @@
   elementTypeHolderClass="de.docksnet.puml.psi.PumlTypes"
   elementTypeClass="de.docksnet.puml.psi.PumlElementType"
   tokenTypeClass="de.docksnet.puml.psi.PumlTokenType"
+
+  // operators
+  COLON         = ":"
+  STEREOTYPE_START         = "<<"
+  STEREOTYPE_END         = ">>"
 }
 
 pumlFile ::= UML_START entry_* UML_END
 
-private entry_ ::= (actorDef|usecaseDef|COMMENT|EOL)
+private entry_ ::= (actorStatement|usecaseDef|COMMENT|EOL)
 
-actorDef ::= ACTOR ID AS ID EOL
+actorStatement ::= actorDef [AS ID] [stereotype] EOL {pin=1}
+actorDef ::= (ACTOR ID | ':' ID ':' | ACTOR ':' ID ':')
+stereotype ::= '<<' STRING '>>'
 
 usecaseDef ::= USECASE ID AS ID EOL
