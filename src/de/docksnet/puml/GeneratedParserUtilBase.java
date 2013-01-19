@@ -1,4 +1,4 @@
-package de.docksnet.puml.parser;
+package de.docksnet.puml;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.BracePair;

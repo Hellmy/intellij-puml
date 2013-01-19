@@ -38,9 +38,8 @@
 
 	<extensions defaultExtensionNs="com.intellij">
 		<fileTypeFactory implementation="de.docksnet.puml.language.PumlFileTypeFactory"/>
-		<lang.parserDefinition language="PUML" implementationClass="de.docksnet.puml.parser.PumlParserDefinition"/>
-		<completion.contributor language="PUML" implementationClass="de.docksnet.puml.PumlCompletionContributor"/>
-
+		<lang.parserDefinition language="PUML" implementationClass="de.docksnet.puml.PumlParserDefinition"/>
+        <lang.syntaxHighlighterFactory key="PUML" implementationClass="de.docksnet.puml.PumlSyntaxHighlighterFactory"/>
         <colorSettingsPage implementation="de.docksnet.puml.PumlColorSettingsPage"/>
 	</extensions>
 </idea-plugin>

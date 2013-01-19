@@ -1,0 +1,24 @@
+
+{
+  parserClass="de.docksnet.puml.parser.PumlParser"
+  stubParserClass="de.docksnet.puml.GeneratedParserUtilBase"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Puml"
+  psiImplClassSuffix="Impl"
+  psiPackage="de.docksnet.puml.psi"
+  psiImplPackage="de.docksnet.puml.psi.impl"
+
+  elementTypeHolderClass="de.docksnet.puml.psi.PumlTypes"
+  elementTypeClass="de.docksnet.puml.psi.PumlElementType"
+  tokenTypeClass="de.docksnet.puml.psi.PumlTokenType"
+}
+
+pumlFile ::= UML_START entry_* UML_END
+
+private entry_ ::= (actorDef|usecaseDef|COMMENT|EOL)
+
+actorDef ::= ACTOR ID AS ID EOL
+
+usecaseDef ::= USECASE ID AS ID EOL

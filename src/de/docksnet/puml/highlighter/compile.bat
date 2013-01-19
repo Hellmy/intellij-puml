@@ -1,1 +1,0 @@
-"%IDEA_SOURCE%\tools\lexer\jflex-1.4\bin\jflex.bat" --skel "%IDEA_SOURCE%\tools\lexer\idea-flex.skeleton" --charat puml.flex

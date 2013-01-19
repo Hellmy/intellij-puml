@@ -7,6 +7,6 @@ import org.jetbrains.annotations.NotNull;
 public class PumlFileTypeFactory extends FileTypeFactory {
     @Override
     public void createFileTypes(@NotNull FileTypeConsumer fileTypeConsumer) {
-        fileTypeConsumer.consume(PumlFileType.PUML_FILE_TYPE, PumlFileType.PUML_FILE_TYPE.getDefaultExtension());
+        fileTypeConsumer.consume(PumlFileType.INSTANCE, PumlFileType.INSTANCE.getDefaultExtension());
     }
 }
