@@ -49,6 +49,8 @@ STRING={QUOTE}({CHAR2}|{LINE_WS}|{EOL})*{QUOTE}
     "(" {yybegin(INSIDE_PARENTHESIS); return PumlTypes.PAR_LEFT; }
     "<<" {yybegin(STEREOTYPE); return PumlTypes.STEREOTYPE_START; }
 
+    {STRING} {yybegin(YYINITIAL); return PumlTypes.MULTI_LINE_STRING; }
+
      {ID} {yybegin(YYINITIAL); return PumlTypes.ID; }
 
      {LINE_WS} {yybegin(YYINITIAL); return com.intellij.psi.TokenType.WHITE_SPACE; }

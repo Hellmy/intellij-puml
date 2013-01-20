@@ -31,6 +31,6 @@ actorDef ::= (ACTOR ID | ':' ID ':' | ACTOR ':' ID ':')
 
 usecaseStatement ::= usecaseDef [AS usecaseAlias] [stereotype] EOL {pin=1}
 usecaseDef ::= (USECASE ID | '(' ID ')' | USECASE '(' ID ')')
-usecaseAlias ::= ('(' ID ')' | ID)
+usecaseAlias ::= ('(' ID ')' | ID | MULTI_LINE_STRING)
 
 stereotype ::= '<<' STRING '>>'
