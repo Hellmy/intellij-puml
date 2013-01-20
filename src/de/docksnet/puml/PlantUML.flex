@@ -33,6 +33,7 @@ CHAR2=[^\n\r\f\\\"]
 STRING={QUOTE}({CHAR2}|{LINE_WS}|{EOL})*{QUOTE}
 
 %state INSIDE_COLONS
+%state INSIDE_PARENTHESIS
 %state STEREOTYPE
 %%
 
@@ -45,6 +46,7 @@ STRING={QUOTE}({CHAR2}|{LINE_WS}|{EOL})*{QUOTE}
     "as" {yybegin(YYINITIAL); return PumlTypes.AS; }
 
     ":" {yybegin(INSIDE_COLONS); return PumlTypes.COLON; }
+    "(" {yybegin(INSIDE_PARENTHESIS); return PumlTypes.PAR_LEFT; }
     "<<" {yybegin(STEREOTYPE); return PumlTypes.STEREOTYPE_START; }
 
      {ID} {yybegin(YYINITIAL); return PumlTypes.ID; }
@@ -58,6 +60,12 @@ STRING={QUOTE}({CHAR2}|{LINE_WS}|{EOL})*{QUOTE}
 <INSIDE_COLONS> {
     {EXT_ID} {yybegin(INSIDE_COLONS); return PumlTypes.ID; }
     ":" {yybegin(YYINITIAL); return PumlTypes.COLON; }
+    [^] {yybegin(YYINITIAL); return com.intellij.psi.TokenType.BAD_CHARACTER; }
+}
+
+<INSIDE_PARENTHESIS> {
+    {EXT_ID} {yybegin(INSIDE_PARENTHESIS); return PumlTypes.ID; }
+    ")" {yybegin(YYINITIAL); return PumlTypes.PAR_RIGHT; }
     [^] {yybegin(YYINITIAL); return com.intellij.psi.TokenType.BAD_CHARACTER; }
 }
 
