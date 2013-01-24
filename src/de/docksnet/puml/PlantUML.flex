@@ -48,6 +48,8 @@ STRING={QUOTE}({CHAR2}|{LINE_WS}|{EOL})*{QUOTE}
     ":" {yybegin(INSIDE_COLONS); return PumlTypes.COLON; }
     "(" {yybegin(INSIDE_PARENTHESIS); return PumlTypes.PAR_LEFT; }
     "<<" {yybegin(STEREOTYPE); return PumlTypes.STEREOTYPE_START; }
+    "-" {yybegin(YYINITIAL); return PumlTypes.DASH; }
+    ">" {yybegin(YYINITIAL); return PumlTypes.ANGLE_BRACKET_RIGHT; }
 
     {STRING} {yybegin(YYINITIAL); return PumlTypes.MULTI_LINE_STRING; }
 
@@ -61,7 +63,7 @@ STRING={QUOTE}({CHAR2}|{LINE_WS}|{EOL})*{QUOTE}
 
 <INSIDE_COLONS> {
     {EXT_ID} {yybegin(INSIDE_COLONS); return PumlTypes.ID; }
-    ":" {yybegin(YYINITIAL); return PumlTypes.COLON; }
+    ":" {yybegin(YYINITIAL); return PumlTypes.EOL; }
     [^] {yybegin(YYINITIAL); return com.intellij.psi.TokenType.BAD_CHARACTER; }
 }
 

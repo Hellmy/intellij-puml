@@ -15,22 +15,29 @@
   tokenTypeClass="de.docksnet.puml.psi.PumlTokenType"
 
   // operators
-  COLON             = ":"
-  PAR_LEFT          = "("
-  PAR_RIGHT         = ")"
-  STEREOTYPE_START  = "<<"
-  STEREOTYPE_END    = ">>"
+  COLON                 = ":"
+  PAR_LEFT              = "("
+  PAR_RIGHT             = ")"
+  STEREOTYPE_START      = "<<"
+  STEREOTYPE_END        = ">>"
+  DASH                  = "-"
+  ANGLE_BRACKET_RIGHT   = ">"
 }
 
 pumlFile ::= UML_START entry_* UML_END
 
-private entry_ ::= (actorStatement|usecaseStatement|COMMENT|EOL)
+private entry_ ::= (actorEntry|usecaseEntry|connectionEntry|COMMENT|EOL)
 
-actorStatement ::= actorDef [AS ID] [stereotype] EOL {pin=1}
+actorEntry ::= actorDef [AS ID] [stereotype] EOL {pin=1}
 actorDef ::= (ACTOR ID | ':' ID ':' | ACTOR ':' ID ':')
 
-usecaseStatement ::= usecaseDef [AS usecaseAlias] [stereotype] EOL {pin=1}
+usecaseEntry ::= usecaseDef [AS usecaseAlias] [stereotype] EOL {pin=1}
 usecaseDef ::= (USECASE ID | '(' ID ')' | USECASE '(' ID ')')
 usecaseAlias ::= ('(' ID ')' | ID | MULTI_LINE_STRING)
+
+connectionEntry ::= actorStatement arrow usecaseStatement [':' LABEL] EOL {pin=1}
+actorStatement ::= ( ID | ':' ID ':')
+usecaseStatement ::= '(' ID ')'
+arrow ::= '-'+ '>'
 
 stereotype ::= '<<' STRING '>>'
