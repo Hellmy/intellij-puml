@@ -29,14 +29,16 @@ pumlFile ::= UML_START entry_* UML_END
 private entry_ ::= (actorEntry|usecaseEntry|connectionEntry|COMMENT|EOL)
 
 actorEntry ::= actorDef [AS ID] [stereotype] EOL {pin=1}
-actorDef ::= (ACTOR ID | ':' ID ':' | ACTOR ':' ID ':')
+private actorDef ::= (ACTOR actorIdDefinition | ':' actorIdDefinition ':' | ACTOR ':' actorIdDefinition ':')
+actorIdDefinition ::= ID
 
 usecaseEntry ::= usecaseDef [AS usecaseAlias] [stereotype] EOL {pin=1}
 usecaseDef ::= (USECASE ID | '(' ID ')' | USECASE '(' ID ')')
 usecaseAlias ::= ('(' ID ')' | ID | MULTI_LINE_STRING)
 
 connectionEntry ::= actorStatement arrow usecaseStatement [':' LABEL] EOL {pin=1}
-actorStatement ::= ( ID | ':' ID ':')
+actorStatement ::= ( actorIdReference | ':' actorIdReference ':')
+actorIdReference ::= ID
 usecaseStatement ::= '(' ID ')'
 arrow ::= '-'+ '>'
 

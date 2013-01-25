@@ -13,10 +13,14 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.intellij.psi.util.PsiTreeUtil;
 import de.docksnet.puml.language.PumlLanguage;
 import de.docksnet.puml.parser.PumlParser;
+import de.docksnet.puml.psi.PumlActorIdDefinition;
 import de.docksnet.puml.psi.PumlFile;
 import de.docksnet.puml.psi.PumlTypes;
+import de.docksnet.puml.psi.impl.PumlActorIdDefinitionImpl;
+import de.docksnet.puml.psi.impl.PumlActorIdReferenceImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Reader;
@@ -68,6 +72,41 @@ public class PumlParserDefinition implements ParserDefinition{
  
     @NotNull
     public PsiElement createElement(ASTNode node) {
+//        if (PumlTypes.ACTOR_ID_REFERENCE.equals(node.getElementType())) {
+//            String actorId = extractIdFromActorIdReference(node);
+//            if (existActorDefinitionWithId(node, actorId)) {
+//                return createActorIdReference(node);
+//            } else {
+//                return createActorIdDefinition(node);
+//            }
+//        }
         return PumlTypes.Factory.createElement(node);
     }
+
+//    private String extractIdFromActorIdReference(ASTNode actorStatement) {
+//        return getIdFromActorDefOrRef(actorStatement);
+//    }
+//
+//    private String getIdFromActorDefOrRef(ASTNode actorStatement) {
+//        return actorStatement.findChildByType(PumlTypes.ID).getText();
+//    }
+//
+//    private boolean existActorDefinitionWithId(ASTNode node, String actorId) {
+//        PsiFile psiFile = PsiTreeUtil.getTopmostParentOfType(node.getPsi(), PsiFile.class);
+//        PumlActorIdDefinition[] actorIdDefinitions = PsiTreeUtil.getChildrenOfType(psiFile, PumlActorIdDefinition.class);
+//        for (PumlActorIdDefinition actorIdDefinition : actorIdDefinitions) {
+//            if (actorId.equals(getIdFromActorDefOrRef(actorIdDefinition))) {
+//
+//            }
+//        }
+//        return false;  //To change body of created methods use File | Settings | File Templates.
+//    }
+//
+//    private PsiElement createActorIdReference(ASTNode node) {
+//        return new PumlActorIdReferenceImpl(node);
+//    }
+//
+//    private PsiElement createActorIdDefinition(ASTNode node) {
+//        return new PumlActorIdDefinitionImpl(node);
+//    }
 }

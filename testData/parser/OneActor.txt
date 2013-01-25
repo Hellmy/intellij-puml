@@ -1,0 +1,8 @@
+PlainUml File
+  PsiElement(PumlTokenType.UML_START)('@startuml\n')
+  PumlActorEntryImpl(ACTOR_ENTRY)
+    PsiElement(PumlTokenType.ACTOR)('actor')
+    PumlActorIdDefinitionImpl(ACTOR_ID_DEFINITION)
+      PsiElement(PumlTokenType.ID)('User')
+    PsiElement(PumlTokenType.EOL)('\n')
+  PsiElement(PumlTokenType.UML_END)('@enduml')
