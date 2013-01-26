@@ -7,7 +7,7 @@ PlainUml File
     PsiElement(PumlTokenType.EOL)('\n')
   PumlConnectionEntryImpl(CONNECTION_ENTRY)
     PumlActorStatementImpl(ACTOR_STATEMENT)
-      PumlActorIdReferenceImpl(ACTOR_ID_DEFINITION)
+      PumlActorIdDefinitionImpl(ACTOR_ID_DEFINITION)
         PsiElement(PumlTokenType.ID)('User2')
     PumlArrowImpl(ARROW)
       PsiElement(PumlTokenType.-)('-')
