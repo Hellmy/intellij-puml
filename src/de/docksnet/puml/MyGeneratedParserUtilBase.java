@@ -8,20 +8,37 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MyGeneratedParserUtilBase extends GeneratedParserUtilBase {
-    public static boolean rememberID(PsiBuilder builder, int level) {
-        if (builder.getTokenType() == PumlTypes.ID) getKnownIDs(builder).add(builder.getTokenText());
+    public static boolean rememberActorID(PsiBuilder builder, int level) {
+        if (builder.getTokenType() == PumlTypes.ID) getKnownActorIDs(builder).add(builder.getTokenText());
         return true;
     }
 
-    public static boolean isKnownID(PsiBuilder builder, int level) {
-        return builder.getTokenType() == PumlTypes.ID && getKnownIDs(builder).contains(builder.getTokenText());
+    public static boolean isKnownActorID(PsiBuilder builder, int level) {
+        return builder.getTokenType() == PumlTypes.ID && getKnownActorIDs(builder).contains(builder.getTokenText());
     }
 
-    private static final Key<Set<String>> KNOWN_IDS = Key.create("KNOWN_IDS");
+    private static final Key<Set<String>> KNOWN_ACTOR_IDS = Key.create("KNOWN_ACTOR_IDS");
 
-    private static Set<String> getKnownIDs(PsiBuilder builder) {
-        Set<String> set = builder.getUserDataUnprotected(KNOWN_IDS);
-        if (set == null) builder.putUserDataUnprotected(KNOWN_IDS, set = new HashSet<>());
+    private static Set<String> getKnownActorIDs(PsiBuilder builder) {
+        Set<String> set = builder.getUserDataUnprotected(KNOWN_ACTOR_IDS);
+        if (set == null) builder.putUserDataUnprotected(KNOWN_ACTOR_IDS, set = new HashSet<>());
+        return set;
+    }
+
+    public static boolean rememberUsecaseID(PsiBuilder builder, int level) {
+        if (builder.getTokenType() == PumlTypes.ID) getKnownUsecaseIDs(builder).add(builder.getTokenText());
+        return true;
+    }
+
+    public static boolean isKnownUsecaseID(PsiBuilder builder, int level) {
+        return builder.getTokenType() == PumlTypes.ID && getKnownUsecaseIDs(builder).contains(builder.getTokenText());
+    }
+
+    private static final Key<Set<String>> KNOWN_USECASE_IDS = Key.create("KNOWN_USECASE_IDS");
+
+    private static Set<String> getKnownUsecaseIDs(PsiBuilder builder) {
+        Set<String> set = builder.getUserDataUnprotected(KNOWN_USECASE_IDS);
+        if (set == null) builder.putUserDataUnprotected(KNOWN_USECASE_IDS, set = new HashSet<>());
         return set;
     }
 }

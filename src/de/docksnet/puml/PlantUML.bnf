@@ -30,17 +30,20 @@ private entry_ ::= (actorEntry|usecaseEntry|connectionEntry|COMMENT|EOL)
 
 actorEntry ::= actorDef [AS ID] [stereotype] EOL {pin=1}
 private actorDef ::= (ACTOR actorIdDefinition | ':' actorIdDefinition ':' | ACTOR ':' actorIdDefinition ':')
-actorIdDefinition ::= <<rememberID>> ID
+actorIdDefinition ::= <<rememberActorID>> ID
 
 usecaseEntry ::= usecaseDef [AS usecaseAlias] [stereotype] EOL {pin=1}
-usecaseDef ::= (USECASE ID | '(' ID ')' | USECASE '(' ID ')')
+private usecaseDef ::= (USECASE usecaseIdDefinition | '(' usecaseIdDefinition ')' | USECASE '(' usecaseIdDefinition ')')
+usecaseIdDefinition ::= <<rememberUsecaseID>> ID
 usecaseAlias ::= ('(' ID ')' | ID | MULTI_LINE_STRING)
 
 connectionEntry ::= actorStatement arrow usecaseStatement [':' LABEL] EOL {pin=1}
 actorStatement ::= ( actorRefOrDef | ':' actorRefOrDef ':')
-private actorRefOrDef ::= (<<isKnownID>> actorIdReference | actorIdDefinition )
+private actorRefOrDef ::= (<<isKnownActorID>> actorIdReference | actorIdDefinition )
 actorIdReference ::= ID
-usecaseStatement ::= '(' ID ')'
+usecaseStatement ::= '(' usecaseRefOrDef ')'
+private usecaseRefOrDef ::= (<<isKnownUsecaseID>> usecaseIdReference | usecaseIdDefinition )
+usecaseIdReference ::= ID
 arrow ::= '-'+ '>'
 
 stereotype ::= '<<' STRING '>>'
