@@ -72,41 +72,6 @@ public class PumlParserDefinition implements ParserDefinition{
  
     @NotNull
     public PsiElement createElement(ASTNode node) {
-//        if (PumlTypes.ACTOR_ID_REFERENCE.equals(node.getElementType())) {
-//            String actorId = extractIdFromActorIdReference(node);
-//            if (existActorDefinitionWithId(node, actorId)) {
-//                return createActorIdReference(node);
-//            } else {
-//                return createActorIdDefinition(node);
-//            }
-//        }
         return PumlTypes.Factory.createElement(node);
     }
-
-//    private String extractIdFromActorIdReference(ASTNode actorStatement) {
-//        return getIdFromActorDefOrRef(actorStatement);
-//    }
-//
-//    private String getIdFromActorDefOrRef(ASTNode actorStatement) {
-//        return actorStatement.findChildByType(PumlTypes.ID).getText();
-//    }
-//
-//    private boolean existActorDefinitionWithId(ASTNode node, String actorId) {
-//        PsiFile psiFile = PsiTreeUtil.getTopmostParentOfType(node.getPsi(), PsiFile.class);
-//        PumlActorIdDefinition[] actorIdDefinitions = PsiTreeUtil.getChildrenOfType(psiFile, PumlActorIdDefinition.class);
-//        for (PumlActorIdDefinition actorIdDefinition : actorIdDefinitions) {
-//            if (actorId.equals(getIdFromActorDefOrRef(actorIdDefinition))) {
-//
-//            }
-//        }
-//        return false;  //To change body of created methods use File | Settings | File Templates.
-//    }
-//
-//    private PsiElement createActorIdReference(ASTNode node) {
-//        return new PumlActorIdReferenceImpl(node);
-//    }
-//
-//    private PsiElement createActorIdDefinition(ASTNode node) {
-//        return new PumlActorIdDefinitionImpl(node);
-//    }
 }
