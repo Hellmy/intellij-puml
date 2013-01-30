@@ -1,7 +1,7 @@
 
 {
   parserClass="de.docksnet.puml.parser.PumlParser"
-  stubParserClass="de.docksnet.puml.GeneratedParserUtilBase"
+  stubParserClass="de.docksnet.puml.MyGeneratedParserUtilBase"
 
   extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
@@ -30,14 +30,15 @@ private entry_ ::= (actorEntry|usecaseEntry|connectionEntry|COMMENT|EOL)
 
 actorEntry ::= actorDef [AS ID] [stereotype] EOL {pin=1}
 private actorDef ::= (ACTOR actorIdDefinition | ':' actorIdDefinition ':' | ACTOR ':' actorIdDefinition ':')
-actorIdDefinition ::= ID
+actorIdDefinition ::= <<rememberID>> ID
 
 usecaseEntry ::= usecaseDef [AS usecaseAlias] [stereotype] EOL {pin=1}
 usecaseDef ::= (USECASE ID | '(' ID ')' | USECASE '(' ID ')')
 usecaseAlias ::= ('(' ID ')' | ID | MULTI_LINE_STRING)
 
 connectionEntry ::= actorStatement arrow usecaseStatement [':' LABEL] EOL {pin=1}
-actorStatement ::= ( actorIdReference | ':' actorIdReference ':')
+actorStatement ::= ( actorRefOrDef | ':' actorRefOrDef ':')
+private actorRefOrDef ::= (<<isKnownID>> actorIdReference | actorIdDefinition )
 actorIdReference ::= ID
 usecaseStatement ::= '(' ID ')'
 arrow ::= '-'+ '>'
