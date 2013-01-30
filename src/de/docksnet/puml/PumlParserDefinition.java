@@ -13,14 +13,10 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiTreeUtil;
 import de.docksnet.puml.language.PumlLanguage;
 import de.docksnet.puml.parser.PumlParser;
-import de.docksnet.puml.psi.PumlActorIdDefinition;
 import de.docksnet.puml.psi.PumlFile;
 import de.docksnet.puml.psi.PumlTypes;
-import de.docksnet.puml.psi.impl.PumlActorIdDefinitionImpl;
-import de.docksnet.puml.psi.impl.PumlActorIdReferenceImpl;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Reader;
