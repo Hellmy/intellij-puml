@@ -14,6 +14,8 @@
   elementTypeClass="de.docksnet.puml.psi.PumlElementType"
   tokenTypeClass="de.docksnet.puml.psi.PumlTokenType"
 
+  psiImplUtilClass="de.docksnet.puml.psi.impl.PumlPsiImplUtil"
+
   // operators
   COLON                 = ":"
   PAR_LEFT              = "("
@@ -30,7 +32,9 @@ private entry_ ::= (actorEntry|usecaseEntry|connectionEntry|COMMENT|EOL)
 
 actorEntry ::= actorDef [AS ID] [stereotype] EOL {pin=1}
 private actorDef ::= (ACTOR actorIdDefinition | ':' actorIdDefinition ':' | ACTOR ':' actorIdDefinition ':')
-actorIdDefinition ::= <<rememberActorID>> ID
+actorIdDefinition ::= <<rememberActorID>> ID {mixin="de.docksnet.puml.psi.impl.PumlNamedElementImpl"
+                                               implements="de.docksnet.puml.psi.PumlNamedElement"
+                                               methods=[getId getName setName getNameIdentifier]}
 
 usecaseEntry ::= usecaseDef [AS usecaseAlias] [stereotype] EOL {pin=1}
 private usecaseDef ::= (USECASE usecaseIdDefinition | '(' usecaseIdDefinition ')' | USECASE '(' usecaseIdDefinition ')')
@@ -40,7 +44,7 @@ usecaseAlias ::= ('(' ID ')' | ID | MULTI_LINE_STRING)
 connectionEntry ::= actorStatement arrow usecaseStatement [':' LABEL] EOL {pin=1}
 actorStatement ::= ( actorRefOrDef | ':' actorRefOrDef ':')
 private actorRefOrDef ::= (<<isKnownActorID>> actorIdReference | actorIdDefinition )
-actorIdReference ::= ID
+actorIdReference ::= ID    {extends="de.docksnet.puml.psi.impl.AbstractPumlActorReference"}
 usecaseStatement ::= '(' usecaseRefOrDef ')'
 private usecaseRefOrDef ::= (<<isKnownUsecaseID>> usecaseIdReference | usecaseIdDefinition )
 usecaseIdReference ::= ID
