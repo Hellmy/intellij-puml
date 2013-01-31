@@ -7,7 +7,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.util.IncorrectOperationException;
 import de.docksnet.puml.psi.PumlActorIdDefinition;
+import de.docksnet.puml.psi.PumlElementFactory;
 import de.docksnet.puml.psi.PumlFile;
+import de.docksnet.puml.psi.PumlTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,7 +46,13 @@ public class AbstractPumlActorReference extends ASTWrapperPsiElement implements 
     }
 
     public PsiElement handleElementRename(String newElementName) throws IncorrectOperationException {
-        throw new IncorrectOperationException();
+        ASTNode keyNode = getNode().findChildByType(PumlTypes.ID);
+        if (keyNode != null) {
+            PumlActorIdDefinition actorIdDefinition = PumlElementFactory.createActorIdDefinition(getProject(), newElementName);
+            ASTNode newKeyNode = actorIdDefinition.getFirstChild().getNode();
+            getNode().replaceChild(keyNode, newKeyNode);
+        }
+        return this;
     }
 
     public boolean isReferenceTo(PsiElement element) {

@@ -3,6 +3,7 @@ package de.docksnet.puml.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import de.docksnet.puml.psi.PumlActorIdDefinition;
+import de.docksnet.puml.psi.PumlElementFactory;
 import de.docksnet.puml.psi.PumlTypes;
 
 public class PumlPsiImplUtil {
@@ -21,15 +22,13 @@ public class PumlPsiImplUtil {
     }
 
     public static PsiElement setName(PumlActorIdDefinition element, String newName) {
-//        ASTNode keyNode = element.getNode().findChildByType(PumlTypes.ID);
-//        if (keyNode != null) {
-//
-//            PumlActorIdDefinition property = SimpleElementFactory.createProperty(element.getProject(), newName);
-//            ASTNode newKeyNode = property.getFirstChild().getNode();
-//            element.getNode().replaceChild(keyNode, newKeyNode);
-//        }
-//        return element;
-        return null;
+        ASTNode keyNode = element.getNode().findChildByType(PumlTypes.ID);
+        if (keyNode != null) {
+            PumlActorIdDefinition actorIdDefinition = PumlElementFactory.createActorIdDefinition(element.getProject(), newName);
+            ASTNode newKeyNode = actorIdDefinition.getFirstChild().getNode();
+            element.getNode().replaceChild(keyNode, newKeyNode);
+        }
+        return element;
     }
 
     public static PsiElement getNameIdentifier(PumlActorIdDefinition element) {
