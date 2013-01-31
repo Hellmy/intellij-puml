@@ -41,5 +41,6 @@
 		<lang.parserDefinition language="PUML" implementationClass="de.docksnet.puml.PumlParserDefinition"/>
         <lang.syntaxHighlighterFactory key="PUML" implementationClass="de.docksnet.puml.PumlSyntaxHighlighterFactory"/>
         <colorSettingsPage implementation="de.docksnet.puml.PumlColorSettingsPage"/>
+        <annotator language="PUML" implementationClass="de.docksnet.puml.editor.PumlDefinitionMarkerAnnotator"/>
 	</extensions>
 </idea-plugin>
